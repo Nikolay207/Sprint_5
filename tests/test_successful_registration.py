@@ -2,12 +2,16 @@ from urls import Urls
 from locators  import TestLocators
 import data
 
+from helpers import generate_random_email
+
+email = generate_random_email()
+
 class 	TestSuccessfulRegistration:
-    def test_successful_registration(driver,random_email):
+    def test_successful_registration(self,driver):
         driver.get(Urls.HOME_URL)
         driver.find_element(*TestLocators.LOGIN_BUTTON).click()
         driver.find_element(*TestLocators.NO_ACCOUNT_BUTTON).click()
-        driver.find_element(*TestLocators.INPUT_EMAIL_BUTTON).send_keys(random_email)
+        driver.find_element(*TestLocators.INPUT_EMAIL_BUTTON).send_keys(email)
         driver.find_element(*TestLocators.INPUT_PASSWORD_BUTTON).send_keys(data.VALID_PASSWORD)
         driver.find_element(*TestLocators.REPEAT_PASSWORD_BUTTON).send_keys(data.VALID_PASSWORD)
         driver.find_element(*TestLocators.CREATE_ACCOUNT).click()

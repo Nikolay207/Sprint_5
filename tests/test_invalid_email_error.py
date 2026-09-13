@@ -2,12 +2,16 @@ from urls import Urls
 from locators  import TestLocators
 import data
 
+from helpers import generate_invalid_email
+
+email = generate_invalid_email()
+
 class TestInvalidEmailError:
-    def test_invalid_email_error(self,driver,invalid_email):
+    def test_invalid_email_error(self,driver):
         driver.get(Urls.HOME_URL)
         driver.find_element(*TestLocators.LOGIN_BUTTON).click()
         driver.find_element(*TestLocators.NO_ACCOUNT_BUTTON).click()
-        driver.find_element(*TestLocators.INPUT_EMAIL_BUTTON).send_keys(invalid_email)
+        driver.find_element(*TestLocators.INPUT_EMAIL_BUTTON).send_keys(email)
         driver.find_element(*TestLocators.INPUT_PASSWORD_BUTTON).send_keys(data.VALID_PASSWORD)
         driver.find_element(*TestLocators.REPEAT_PASSWORD_BUTTON).send_keys(data.VALID_PASSWORD)
         driver.find_element(*TestLocators.CREATE_ACCOUNT).click()
